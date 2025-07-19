@@ -13,7 +13,10 @@ RUN a2enmod rewrite
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /var/www
+
+RUN rm -rf /var/www/html \
+    && ln -s /var/www/public /var/www/html
 
 # Copy application files
 COPY . .
