@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moi-portal-php-uat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moi-portal-php-uat
+  template:
+    metadata:
+      labels:
+        app: moi-portal-php-uat
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: moi-portal-php-uat
+        image: cwalletuat.azurecr.io/moi-portal-php-uat:679
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moi-portal-php-uat
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  selector:
+    app: moi-portal-php-uat
