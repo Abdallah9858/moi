@@ -1,19 +1,10 @@
 # Use official PHP image with Apache
 FROM php:8.2-apache
 
-# Install dependencies
-
+# Install dependencies including PostgreSQL headers
 RUN apt-get update && apt-get install -y \
-    git unzip libzip-dev libpng-dev libonig-dev libxml2-dev zip \
+    git unzip libzip-dev libpng-dev libonig-dev libxml2-dev zip libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql pgsql pdo_mysql zip mbstring exif pcntl bcmath gd
-
-    # Install dependencies including PostgreSQL headers
-RUN apt-get update && apt-get install -y \
-    git unzip libzip-dev libpng-dev libonig-dev libxml2-dev zip \
-    libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql pgsql pdo_mysql zip mbstring exif pcntl bcmath gd
-
-
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
@@ -34,7 +25,6 @@ COPY . .
 RUN composer install --optimize-autoloader --no-dev
 
 # Set permissions for Laravel storage and cache
-
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
