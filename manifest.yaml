@@ -17,7 +17,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: CONTAINER_NAME
-        image: CONTAINER_REGISTRY/CONTAINER_IMAGE:BUILD_NUMBER
+        image: CONTAINER_IMAGE
         ports:
         - containerPort: CONTAINER_PORT
         resources:
