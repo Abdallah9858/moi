@@ -40,6 +40,6 @@ spec:
   ports:
   - name: http
     port: 80
-    targetPort: CONTAINER_PORT
+    targetPort: 80
   selector:
     app: CONTAINER_NAME
