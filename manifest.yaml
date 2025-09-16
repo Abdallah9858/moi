@@ -16,18 +16,18 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: CONTAINER_NAME
-        image: CONTAINER_IMAGE
+        image: CONTAINER_REGISTRY/CONTAINER_IMAGE:BUILD_NUMBER
         ports:
         - containerPort: CONTAINER_PORT
         resources:
           requests:
             cpu: 100m
             memory: 100Mi
-        envFrom:
-        - configMapRef:
-            name: moi-web-config     # non-sensitive values
-        - secretRef:
-            name: appdb-secret       # sensitive values
+     #   envFrom:
+    #    - configMapRef:
+     #       name: moi-web-config     # non-sensitive values
+    #    - secretRef:
+    #        name: appdb-secret       # sensitive values
 ---
 apiVersion: v1
 kind: Service
